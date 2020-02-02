@@ -7,20 +7,109 @@
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
+    if (n < 0) {
+        return null;
+    }
+    if (n === 0) {
+        return 1;
+    }
+    return (n * factorial(n-1));
+    
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+    let copiedArr = array.slice();
+    let nextArr = array.slice();
+    let addNext = nextArr.pop();
+
+    if (copiedArr.length === 0) {
+        return 0
+    }
+    if (copiedArr.length === 1) {
+        return copiedArr[0]
+    }
+    nextArr[0] += addNext;
+    return sum(nextArr);    
 };
+
+// var arraySum = function(array) {
+//     let copiedArr = array.slice();
+//     let nextArr = array.slice();
+//     let addNext = nextArr.pop();
+
+//     if (Array.isArray(copiedArr[0])) {
+//         copiedArr[0] = arraySum(copiedArr[0]);
+//     };
+//     if (Array.isArray(nextArr[0])) {
+//         nextArr[0] = arraySum(nextArr[0]);
+//     };
+//     if (Array.isArray(addNext)) {
+//         isNext = arraySum(isNext);
+//     }
+
+
+//     if (copiedArr.length === 0) {
+//         return 0
+//     }
+//     if (copiedArr.length === 1) {
+//         return copiedArr[0]
+//     }
+//     nextArr[0] += addNext;
+//     return arraySum(nextArr);    
+// };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+    let copiedArr = array.slice();
+    let nextArr = array.slice();
+    let addNext = nextArr.pop();
+
+    if (Array.isArray(copiedArr[0])) {
+        copiedArr[0] = arraySum(copiedArr[0]);
+    };
+    if (Array.isArray(nextArr[0])) {
+        nextArr[0] = arraySum(nextArr[0]);
+    };
+    if (Array.isArray(addNext)) {
+        isNext = arraySum(isNext);
+    }
+
+
+    if (copiedArr.length === 0) {
+        return 0
+    }
+    if (copiedArr.length === 1) {
+        return copiedArr[0]
+    }
+    nextArr[0] += addNext;
+    return arraySum(nextArr);    
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+    if (n === 0 || n++ === 0 || n-- === 0) {
+        return true;
+    }
+    if (n === 1 || n === -1) {
+        return false
+    }
+    if (n < 0) {
+        if (n++ > 0) {
+            return false;
+        } else {
+            return isEven(n++)
+        }
+    };
+    if (n > 0) {
+        if (n-- < 0) {
+            return false;
+        } else {
+            return isEven(n--)
+        }
+    };
 };
 
 // 5. Sum all integers below a given integer.
